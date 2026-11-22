@@ -48,7 +48,6 @@
       z-index: 0;
     }
 
-    /* Portada inicial */
     #splash {
       position: fixed;
       inset: 0;
@@ -190,7 +189,6 @@
       font-weight: 600;
     }
 
-    /* Video opcional */
     .video-wrap {
       margin-top: 1rem;
       border-radius: 18px;
@@ -299,12 +297,33 @@
       color: var(--text-soft);
       font-size: 0.94rem;
     }
+
+    #music-btn {
+      position: fixed;
+      bottom: 18px;
+      right: 18px;
+      z-index: 40;
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      border: 1px solid var(--gold-light);
+      background: rgba(9, 24, 68, 0.92);
+      color: var(--gold-light);
+      font-size: 1.15rem;
+      cursor: pointer;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.45);
+    }
   </style>
 </head>
 <body>
   <div class="sparkles"></div>
 
-  <!-- Portada inicial -->
+  <audio id="bg-music" loop preload="metadata">
+    <source src="musica.mp3" type="audio/mpeg" />
+  </audio>
+
+  <button id="music-btn" type="button" aria-label="Controlar música" title="Música">♪</button>
+
   <div id="splash">
     <div class="seal-badge">XV</div>
     <p class="splash-subtitle">Tienes una invitación especial</p>
@@ -313,7 +332,6 @@
   </div>
 
   <main>
-    <!-- Quinceañera y Padres -->
     <section class="card">
       <p class="kicker">Con la bendición de Dios y mis padres</p>
       <h1>Mis XV Años</h1>
@@ -326,9 +344,8 @@
       </div>
     </section>
 
-    <!-- Sección del video (si subes el archivo video.mp4 junto con index.html) -->
     <section class="card" id="video-section" style="display: none;">
-      <p class="kicker">Un adelanto mágico</p>
+      <p class="kicker">Un adelanto especial</p>
       <h2>Mi invitación</h2>
       <div class="video-wrap">
         <video id="invite-video" controls playsinline preload="metadata">
@@ -337,7 +354,6 @@
       </div>
     </section>
 
-    <!-- Cuenta regresiva -->
     <section class="card">
       <p class="kicker">Falta muy poco</p>
       <h2>Cuenta regresiva</h2>
@@ -350,7 +366,6 @@
       </div>
     </section>
 
-    <!-- Fecha, hora y lugar -->
     <section class="card">
       <p class="kicker">Detalles del evento</p>
       <h2>¿Cuándo y dónde?</h2>
@@ -380,7 +395,6 @@
       </div>
     </section>
 
-    <!-- Vestimenta, color reservado y regalo -->
     <section class="card">
       <p class="kicker">Indicaciones</p>
       <h2>Vestimenta y detalles</h2>
@@ -402,7 +416,6 @@
       </div>
     </section>
 
-    <!-- Confirmación por WhatsApp al 300 7588237 -->
     <section class="card">
       <p class="kicker">Confirmación</p>
       <h2>Confirmar asistencia ✍🏼</h2>
@@ -421,10 +434,30 @@
   <script>
     const splash = document.getElementById("splash");
     const openBtn = document.getElementById("open-btn");
+    const bgMusic = document.getElementById("bg-music");
+    const musicBtn = document.getElementById("music-btn");
     const videoSection = document.getElementById("video-section");
     const inviteVideo = document.getElementById("invite-video");
+    let isPlaying = false;
 
-    // Muestra el reproductor solo si existe el archivo video.mp4 en la carpeta
+    function playMusic() {
+      bgMusic.play().then(() => {
+        isPlaying = true;
+        musicBtn.textContent = "❚❚";
+      }).catch(() => {});
+    }
+
+    function pauseMusic() {
+      bgMusic.pause();
+      isPlaying = false;
+      musicBtn.textContent = "♪";
+    }
+
+    musicBtn.addEventListener("click", () => {
+      if (isPlaying) pauseMusic();
+      else playMusic();
+    });
+
     fetch("video.mp4", { method: "HEAD" })
       .then((res) => {
         if (res.ok) videoSection.style.display = "block";
@@ -433,12 +466,13 @@
 
     openBtn.addEventListener("click", () => {
       splash.classList.add("hidden");
-      if (videoSection.style.display === "block") {
-        inviteVideo.play().catch(() => {});
-      }
+      playMusic();
     });
 
-    // Cuenta regresiva: 13 de diciembre de 2026 a las 7:00 p. m.
+    inviteVideo.addEventListener("play", () => {
+      if (isPlaying) pauseMusic();
+    });
+
     const eventDate = new Date("2026-12-13T19:00:00-05:00").getTime();
 
     function updateCountdown() {

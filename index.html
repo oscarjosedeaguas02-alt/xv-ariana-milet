@@ -62,7 +62,6 @@
       100% { transform: scale(1.08) translate(-2%, 2%); }
     }
 
-    /* Portada inicial */
     #splash {
       position: fixed;
       inset: 0;
@@ -74,7 +73,7 @@
       text-align: center;
       padding: 2rem;
       background: radial-gradient(circle at center, #1846bd 0%, #03091f 88%);
-      transition: opacity 0.7s ease, visibility 0.7s ease;
+      transition: opacity 0.5s ease, visibility 0.5s ease;
     }
 
     #splash.hidden {
@@ -98,12 +97,6 @@
       color: var(--gold-light);
       margin-bottom: 1.4rem;
       background: rgba(5, 15, 48, 0.92);
-      animation: pulseSeal 3s ease-in-out infinite;
-    }
-
-    @keyframes pulseSeal {
-      0%, 100% { box-shadow: 0 0 28px rgba(58, 123, 255, 0.7), inset 0 0 18px rgba(246, 223, 159, 0.35); }
-      50% { box-shadow: 0 0 46px rgba(246, 223, 159, 0.65), inset 0 0 24px rgba(58, 123, 255, 0.5); }
     }
 
     .splash-subtitle {
@@ -415,7 +408,7 @@
     <div class="seal-badge">XV</div>
     <p class="splash-subtitle">Celebremos juntos mis</p>
     <p class="splash-name">Ariana Milet</p>
-    <button class="btn-open" id="open-btn" type="button">Abrir invitación</button>
+    <button class="btn-open" id="open-btn" type="button" onclick="openInvitation()">Abrir invitación</button>
   </div>
 
   <main>
@@ -432,7 +425,6 @@
       </div>
     </section>
 
-    <!-- Video vertical automático tipo GIF -->
     <section class="card" id="video-section" style="display: none;">
       <p class="kicker">Un instante mágico</p>
       <h2>Ariana Milet</h2>
@@ -522,7 +514,6 @@
 
   <script>
     const splash = document.getElementById("splash");
-    const openBtn = document.getElementById("open-btn");
     const bgMusic = document.getElementById("bg-music");
     const musicBtn = document.getElementById("music-btn");
     const videoSection = document.getElementById("video-section");
@@ -530,6 +521,7 @@
     let isPlaying = false;
 
     function playMusic() {
+      if (!bgMusic) return;
       bgMusic.play().then(() => {
         isPlaying = true;
         musicBtn.textContent = "❚❚";
@@ -537,47 +529,161 @@
     }
 
     function pauseMusic() {
+      if (!bgMusic) return;
       bgMusic.pause();
       isPlaying = false;
       musicBtn.textContent = "♪";
     }
 
-    musicBtn.addEventListener("click", () => {
-      if (isPlaying) pauseMusic();
-      else playMusic();
-    });
-
-    fetch("video.mp4", { method: "HEAD" })
-      .then((res) => {
-        if (res.ok) {
-          videoSection.style.display = "block";
-          inviteVideo.muted = true;
-          inviteVideo.play().catch(() => {});
-        }
-      })
-      .catch(() => {});
-
-    openBtn.addEventListener("click", () => {
-      splash.classList.add("hidden");
+    function openInvitation() {
+      if (splash) {
+        splash.classList.add("hidden");
+        splash.style.display = "none";
+      }
       playMusic();
-      if (videoSection.style.display === "block") {
+      if (videoSection && videoSection.style.display === "block" && inviteVideo) {
         inviteVideo.muted = true;
         inviteVideo.play().catch(() => {});
       }
-    });
+    }
+
+    if (musicBtn) {
+      musicBtn.addEventListener("click", () => {
+        if (isPlaying) pauseMusic();
+        else playMusic();
+      });
+    }
+
+    if (window.location.protocol !== "file:") {
+      fetch("video.mp4", { method: "HEAD" })
+        .then((res) => {
+          if (res.ok && videoSection && inviteVideo) {
+            videoSection.style.display = "block";
+            inviteVideo.muted = true;
+            inviteVideo.play().catch(() => {});
+          }
+        })
+        .catch(() => {});
+    }
 
     const eventDate = new Date("2026-12-13T19:00:00-05:00").getTime();
 
     function updateCountdown() {
       const now = Date.now();
       const diff = eventDate - now;
+      const countdownEl = document.getElementById("countdown");
+      if (!countdownEl) return;
 
       if (diff <= 0) {
-        document.getElementById("countdown").innerHTML =
+        countdownEl.innerHTML =
           '<p class="info-value" style="grid-column: 1 / -1;">¡Hoy es la gran noche de Ariana Milet!</p>';
         return;
       }
 
       const days = Math.floor(diff / (1000 * 60 * 60 * 24));
       const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
-      const minutes = Math.floor((diff / (1000 * 60)) % 6
+      const minutes = Math.floor((diff / (1000 * 60)) % 60);
+      const seconds = Math.floor((diff / 1000) % 60);
+
+      document.getElementById("days").textContent = String(days).padStart(2, "0");
+      document.getElementById("hours").textContent = String(hours).padStart(2, "0");
+      document.getElementById("minutes").textContent = String(minutes).padStart(2, "0");
+      document.getElementById("seconds").textContent = String(seconds).padStart(2, "0");
+    }
+
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+
+    try {
+      const canvas = document.getElementById("magic-canvas");
+      const ctx = canvas ? canvas.getContext("2d") : null;
+      if (canvas && ctx) {
+        let width = (canvas.width = window.innerWidth);
+        let height = (canvas.height = window.innerHeight);
+
+        window.addEventListener("resize", () => {
+          width = canvas.width = window.innerWidth;
+          height = canvas.height = window.innerHeight;
+        });
+
+        const particles = [];
+        const colors = ["rgba(246, 223, 159,", "rgba(170, 210, 255,", "rgba(255, 255, 255,"];
+
+        function createParticle(x, y, burst = false) {
+          const color = colors[Math.floor(Math.random() * colors.length)];
+          return {
+            x: x ?? Math.random() * width,
+            y: y ?? Math.random() * height,
+            r: burst ? Math.random() * 2.8 + 1.2 : Math.random() * 2.2 + 0.6,
+            vx: burst ? (Math.random() - 0.5) * 2.4 : (Math.random() - 0.5) * 0.35,
+            vy: burst ? (Math.random() - 0.5) * 2.4 : -(Math.random() * 0.45 + 0.15),
+            alpha: burst ? 0.95 : Math.random() * 0.7 + 0.2,
+            decay: burst ? 0.02 : 0,
+            twinkle: Math.random() * Math.PI * 2,
+            color
+          };
+        }
+
+        for (let i = 0; i < 65; i++) {
+          particles.push(createParticle());
+        }
+
+        function spawnBurst(x, y, count = 10) {
+          for (let i = 0; i < count; i++) {
+            particles.push(createParticle(x, y, true));
+          }
+          if (particles.length > 160) {
+            particles.splice(65, particles.length - 160);
+          }
+        }
+
+        window.addEventListener("pointermove", (e) => {
+          if (Math.random() < 0.35) spawnBurst(e.clientX, e.clientY, 2);
+        });
+
+        window.addEventListener("pointerdown", (e) => {
+          spawnBurst(e.clientX, e.clientY, 14);
+        });
+
+        function animateMagic() {
+          ctx.clearRect(0, 0, width, height);
+
+          for (let i = particles.length - 1; i >= 0; i--) {
+            const p = particles[i];
+            p.x += p.vx;
+            p.y += p.vy;
+            p.twinkle += 0.04;
+
+            if (p.decay > 0) {
+              p.alpha -= p.decay;
+              if (p.alpha <= 0) {
+                particles.splice(i, 1);
+                continue;
+              }
+            } else {
+              if (p.y < -10) p.y = height + 10;
+              if (p.x < -10) p.x = width + 10;
+              if (p.x > width + 10) p.x = -10;
+            }
+
+            const currentAlpha = p.decay > 0
+              ? p.alpha
+              : p.alpha * (0.65 + 0.35 * Math.sin(p.twinkle));
+
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+            ctx.fillStyle = `${p.color} ${currentAlpha.toFixed(2)})`;
+            ctx.shadowBlur = 10;
+            ctx.shadowColor = "rgba(246, 223, 159, 0.7)";
+            ctx.fill();
+          }
+
+          requestAnimationFrame(animateMagic);
+        }
+
+        animateMagic();
+      }
+    } catch (e) {}
+  </script>
+</body>
+</html>

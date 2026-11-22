@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mis XV Años — Ariana Milet</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --royal-deep: #040d26;
+      --royal-blue: #0d2b7a;
+      --royal-bright: #1d56d8;
+      --bg-card: rgba(9, 24, 68, 0.82);
+      --gold-light: #f3d999;
+      --ice-blue: #d6e6ff;
+      --text-main: #ffffff;
+      --text-soft: #c7d9ff;
+      --border-royal: rgba(130, 177, 255, 0.35);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background: radial-gradient(circle at top, #1743b5 0%, var(--royal-blue) 40%, var(--royal-deep) 90%);
+      color: var(--text-main);
+      min-height: 100vh;
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
+
+    .sparkles {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background-image:
+        radial-gradient(2px 2px at 18% 25%, rgba(255,255,255,0.8), transparent),
+        radial-gradient(2px 2px at 82% 18%, rgba(243,217,153,0.8), transparent),
+        radial-gradient(1.5px 1.5px at 50% 65%, rgba(255,255,255,0.7), transparent),
+        radial-gradient(2px 2px at 15% 82%, rgba(160,200,255,0.7), transparent),
+        radial-gradient(2px 2px at 88% 78%, rgba(243,217,153,0.7), transparent);
+      z-index: 0;
+    }
+
+    /* Portada inicial */
+    #splash {
+      position: fixed;
+      inset: 0;
+      z-index: 50;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 2rem;
+      background: radial-gradient(circle at center, #1846bd 0%, #040d26 85%);
+      transition: opacity 0.6s ease, visibility 0.6s ease;
+    }
+
+    #splash.hidden {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+
+    .seal-badge {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      border: 2px solid var(--gold-light);
+      box-shadow: 0 0 30px rgba(45, 108, 255, 0.7), inset 0 0 18px rgba(243, 217, 153, 0.35);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Cinzel', serif;
+      font-size: 2.2rem;
+      font-weight: 700;
+      color: var(--gold-light);
+      margin-bottom: 1.5rem;
+      background: rgba(6, 18, 54, 0.9);
+    }
+
+    .splash-subtitle {
+      font-size: 0.85rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--text-soft);
+      margin-bottom: 0.5rem;
+    }
+
+    .splash-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.6rem, 8vw, 4rem);
+      font-style: italic;
+      color: #ffffff;
+      margin-bottom: 1.8rem;
+      text-shadow: 0 0 24px rgba(100, 160, 255, 0.6);
+    }
+
+    .btn-open {
+      background: linear-gradient(135deg, #2d6df6, #10389c);
+      color: #ffffff;
+      border: 1px solid var(--gold-light);
+      padding: 1rem 2.3rem;
+      border-radius: 999px;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      cursor: pointer;
+      box-shadow: 0 8px 25px rgba(16, 56, 156, 0.7);
+    }
+
+    main {
+      position: relative;
+      z-index: 1;
+      max-width: 650px;
+      margin: 0 auto;
+      padding: 2.2rem 1.2rem 4rem;
+    }
+
+    .card {
+      background: var(--bg-card);
+      backdrop-filter: blur(10px);
+      border: 1px solid var(--border-royal);
+      border-radius: 24px;
+      padding: 2.1rem 1.4rem;
+      margin-bottom: 1.4rem;
+      text-align: center;
+      box-shadow: 0 14px 35px rgba(0, 0, 0, 0.45);
+    }
+
+    .kicker {
+      font-size: 0.75rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold-light);
+      margin-bottom: 0.5rem;
+    }
+
+    h1 {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(1.9rem, 6vw, 2.7rem);
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      color: #ffffff;
+      margin-bottom: 0.2rem;
+    }
+
+    .quinceanera-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.8rem, 8.5vw, 4.2rem);
+      font-style: italic;
+      font-weight: 600;
+      color: var(--ice-blue);
+      line-height: 1.1;
+      margin-bottom: 1rem;
+      text-shadow: 0 0 22px rgba(77, 148, 255, 0.55);
+    }
+
+    h2 {
+      font-family: 'Cinzel', serif;
+      font-size: 1.3rem;
+      letter-spacing: 0.08em;
+      color: #ffffff;
+      margin-bottom: 1rem;
+    }
+
+    .parents-box {
+      margin-top: 1.2rem;
+      padding-top: 1.2rem;
+      border-top: 1px solid var(--border-royal);
+      color: var(--text-soft);
+      font-size: 0.98rem;
+    }
+
+    .parents-box p {
+      margin: 0.35rem 0;
+    }
+
+    .parents-box strong {
+      color: var(--gold-light);
+      font-weight: 600;
+    }
+
+    /* Video opcional */
+    .video-wrap {
+      margin-top: 1rem;
+      border-radius: 18px;
+      overflow: hidden;
+      border: 1px solid var(--border-royal);
+      background: #03091a;
+    }
+
+    .video-wrap video {
+      width: 100%;
+      max-height: 460px;
+      display: block;
+      object-fit: cover;
+    }
+
+    .countdown-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0.6rem;
+      margin-top: 1rem;
+    }
+
+    .time-box {
+      background: rgba(4, 13, 38, 0.8);
+      border: 1px solid var(--border-royal);
+      border-radius: 16px;
+      padding: 0.9rem 0.3rem;
+    }
+
+    .time-box span {
+      display: block;
+      font-family: 'Cinzel', serif;
+      font-size: clamp(1.4rem, 4.5vw, 2rem);
+      font-weight: 700;
+      color: var(--gold-light);
+    }
+
+    .time-box small {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--text-soft);
+    }
+
+    .info-item {
+      padding: 0.85rem 0;
+      border-bottom: 1px solid rgba(130, 177, 255, 0.18);
+    }
+
+    .info-item:last-child {
+      border-bottom: none;
+    }
+
+    .info-label {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--gold-light);
+      margin-bottom: 0.25rem;
+    }
+
+    .info-value {
+      font-size: 1.08rem;
+      font-weight: 600;
+      color: #ffffff;
+    }
+
+    .dress-icons {
+      font-size: 1.7rem;
+      margin: 0.4rem 0;
+      letter-spacing: 0.5rem;
+    }
+
+    .btn-action {
+      display: inline-block;
+      margin-top: 1rem;
+      padding: 0.9rem 1.8rem;
+      border-radius: 999px;
+      text-decoration: none;
+      font-size: 0.86rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      transition: transform 0.2s ease;
+    }
+
+    .btn-action:hover {
+      transform: translateY(-2px);
+    }
+
+    .btn-map {
+      background: rgba(45, 109, 246, 0.25);
+      color: #ffffff;
+      border: 1px solid var(--gold-light);
+    }
+
+    .btn-whatsapp {
+      background: linear-gradient(135deg, #25d366, #128c7e);
+      color: #ffffff;
+      box-shadow: 0 8px 24px rgba(37, 211, 102, 0.4);
+      padding: 1.05rem 2.1rem;
+      font-size: 0.92rem;
+    }
+
+    .note {
+      color: var(--text-soft);
+      font-size: 0.94rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="sparkles"></div>
+
+  <!-- Portada inicial -->
+  <div id="splash">
+    <div class="seal-badge">XV</div>
+    <p class="splash-subtitle">Tienes una invitación especial</p>
+    <p class="splash-name">Ariana Milet</p>
+    <button class="btn-open" id="open-btn" type="button">Abrir invitación</button>
+  </div>
+
+  <main>
+    <!-- Quinceañera y Padres -->
+    <section class="card">
+      <p class="kicker">Con la bendición de Dios y mis padres</p>
+      <h1>Mis XV Años</h1>
+      <div class="quinceanera-name">Ariana Milet</div>
+      <p class="note">Te invito a celebrar conmigo una noche inolvidable.</p>
+
+      <div class="parents-box">
+        <p><strong>Mamá:</strong> Milena de la Cruz</p>
+        <p><strong>Papá:</strong> Ramón Mercado</p>
+      </div>
+    </section>
+
+    <!-- Sección del video (si subes el archivo video.mp4 junto con index.html) -->
+    <section class="card" id="video-section" style="display: none;">
+      <p class="kicker">Un adelanto mágico</p>
+      <h2>Mi invitación</h2>
+      <div class="video-wrap">
+        <video id="invite-video" controls playsinline preload="metadata">
+          <source src="video.mp4" type="video/mp4" />
+        </video>
+      </div>
+    </section>
+
+    <!-- Cuenta regresiva -->
+    <section class="card">
+      <p class="kicker">Falta muy poco</p>
+      <h2>Cuenta regresiva</h2>
+      <p class="note">13 de diciembre · 7:00 p. m.</p>
+      <div class="countdown-grid" id="countdown">
+        <div class="time-box"><span id="days">--</span><small>Días</small></div>
+        <div class="time-box"><span id="hours">--</span><small>Horas</small></div>
+        <div class="time-box"><span id="minutes">--</span><small>Min</small></div>
+        <div class="time-box"><span id="seconds">--</span><small>Seg</small></div>
+      </div>
+    </section>
+
+    <!-- Fecha, hora y lugar -->
+    <section class="card">
+      <p class="kicker">Detalles del evento</p>
+      <h2>¿Cuándo y dónde?</h2>
+
+      <div class="info-item">
+        <div class="info-label">Día</div>
+        <div class="info-value">13 de diciembre</div>
+      </div>
+
+      <div class="info-item">
+        <div class="info-label">Hora</div>
+        <div class="info-value">7:00 p. m.</div>
+      </div>
+
+      <div class="info-item">
+        <div class="info-label">Lugar</div>
+        <div class="info-value">Salón Imperial</div>
+        <div class="note">Carrera 14 #44A-18 · Soledad 2000</div>
+        <a
+          class="btn-action btn-map"
+          href="https://www.google.com/maps/search/?api=1&query=Carrera+14+%2344A-18%2C+Soledad+2000"
+          target="_blank"
+          rel="noopener"
+        >
+          Ver ubicación en Maps
+        </a>
+      </div>
+    </section>
+
+    <!-- Vestimenta, color reservado y regalo -->
+    <section class="card">
+      <p class="kicker">Indicaciones</p>
+      <h2>Vestimenta y detalles</h2>
+
+      <div class="info-item">
+        <div class="info-label">Código de vestimenta</div>
+        <div class="dress-icons">👗 &nbsp; 👔</div>
+        <div class="info-value">Vestido / Formal</div>
+      </div>
+
+      <div class="info-item">
+        <div class="info-label">Color reservado</div>
+        <div class="info-value">Se reserva el color azul</div>
+      </div>
+
+      <div class="info-item">
+        <div class="info-label">Regalo</div>
+        <div class="info-value">Lluvia de sobres</div>
+      </div>
+    </section>
+
+    <!-- Confirmación por WhatsApp al 300 7588237 -->
+    <section class="card">
+      <p class="kicker">Confirmación</p>
+      <h2>Confirmar asistencia ✍🏼</h2>
+      <p class="note">Toca el botón para confirmar tu asistencia directamente por WhatsApp.</p>
+      <a
+        class="btn-action btn-whatsapp"
+        href="https://wa.me/573007588237?text=Hola%2C%20confirmo%20mi%20asistencia%20a%20los%20XV%20a%C3%B1os%20de%20Ariana%20Milet%20el%2013%20de%20diciembre.%20Mi%20nombre%20es%3A%20"
+        target="_blank"
+        rel="noopener"
+      >
+        Confirmar asistencia ✍🏼
+      </a>
+    </section>
+  </main>
+
+  <script>
+    const splash = document.getElementById("splash");
+    const openBtn = document.getElementById("open-btn");
+    const videoSection = document.getElementById("video-section");
+    const inviteVideo = document.getElementById("invite-video");
+
+    // Muestra el reproductor solo si existe el archivo video.mp4 en la carpeta
+    fetch("video.mp4", { method: "HEAD" })
+      .then((res) => {
+        if (res.ok) videoSection.style.display = "block";
+      })
+      .catch(() => {});
+
+    openBtn.addEventListener("click", () => {
+      splash.classList.add("hidden");
+      if (videoSection.style.display === "block") {
+        inviteVideo.play().catch(() => {});
+      }
+    });
+
+    // Cuenta regresiva: 13 de diciembre de 2026 a las 7:00 p. m.
+    const eventDate = new Date("2026-12-13T19:00:00-05:00").getTime();
+
+    function updateCountdown() {
+      const now = Date.now();
+      const diff = eventDate - now;
+
+      if (diff <= 0) {
+        document.getElementById("countdown").innerHTML =
+          '<p class="info-value" style="grid-column: 1 / -1;">¡Hoy es la gran noche de Ariana Milet!</p>';
+        return;
+      }
+
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+      const minutes = Math.floor((diff / (1000 * 60)) % 60);
+      const seconds = Math.floor((diff / 1000) % 60);
+
+      document.getElementById("days").textContent = String(days).padStart(2, "0");
+      document.getElementById("hours").textContent = String(hours).padStart(2, "0");
+      document.getElementById("minutes").textContent = String(minutes).padStart(2, "0");
+      document.getElementById("seconds").textContent = String(seconds).padStart(2, "0");
+    }
+
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+  </script>
+</body>
+</html>

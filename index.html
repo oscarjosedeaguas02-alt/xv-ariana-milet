@@ -6,7 +6,7 @@
   <title>Mis XV Años — Ariana Milet</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Great+Vibes&family=Playfair+Display:ital,wght@0,500;0,600;1,500;1,600&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
   <style>
     :root {
       --royal-deep: #03091f;
@@ -17,8 +17,8 @@
       --gold-accent: #d4af37;
       --ice-blue: #dceaff;
       --text-main: #ffffff;
-      --text-soft: #c9dcff;
-      --border-royal: rgba(246, 223, 159, 0.28);
+      --text-soft: #d2e3ff;
+      --border-royal: rgba(246, 223, 159, 0.34);
     }
 
     * {
@@ -33,10 +33,9 @@
       color: var(--text-main);
       min-height: 100vh;
       overflow-x: hidden;
-      line-height: 1.6;
+      line-height: 1.65;
     }
 
-    /* Fondo mágico interactivo */
     #magic-canvas {
       position: fixed;
       inset: 0;
@@ -85,20 +84,20 @@
     }
 
     .seal-badge {
-      width: 106px;
-      height: 106px;
+      width: 112px;
+      height: 112px;
       border-radius: 50%;
       border: 2px solid var(--gold-light);
-      box-shadow: 0 0 35px rgba(58, 123, 255, 0.8), inset 0 0 20px rgba(246, 223, 159, 0.4);
+      box-shadow: 0 0 38px rgba(58, 123, 255, 0.85), inset 0 0 22px rgba(246, 223, 159, 0.45);
       display: flex;
       align-items: center;
       justify-content: center;
       font-family: 'Cinzel', serif;
-      font-size: 2.3rem;
+      font-size: 2.5rem;
       font-weight: 700;
       color: var(--gold-light);
-      margin-bottom: 1.5rem;
-      background: rgba(5, 15, 48, 0.9);
+      margin-bottom: 1.4rem;
+      background: rgba(5, 15, 48, 0.92);
       animation: pulseSeal 3s ease-in-out infinite;
     }
 
@@ -108,31 +107,33 @@
     }
 
     .splash-subtitle {
-      font-size: 0.85rem;
-      letter-spacing: 0.24em;
-      text-transform: uppercase;
-      color: var(--text-soft);
-      margin-bottom: 0.5rem;
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: 1.15rem;
+      letter-spacing: 0.08em;
+      color: var(--gold-light);
+      margin-bottom: 0.3rem;
     }
 
     .splash-name {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(2.8rem, 8vw, 4.2rem);
-      font-style: italic;
+      font-family: 'Great Vibes', cursive;
+      font-size: clamp(3.6rem, 12vw, 5.4rem);
+      font-weight: 400;
+      line-height: 1.05;
       color: #ffffff;
       margin-bottom: 1.8rem;
-      text-shadow: 0 0 28px rgba(130, 180, 255, 0.75);
+      text-shadow: 0 0 30px rgba(130, 180, 255, 0.8), 0 4px 16px rgba(0, 0, 0, 0.55);
     }
 
     .btn-open {
       background: linear-gradient(135deg, #2d6df6, #0e3394);
       color: #ffffff;
       border: 1px solid var(--gold-light);
-      padding: 1rem 2.4rem;
+      padding: 1rem 2.5rem;
       border-radius: 999px;
-      font-family: 'Montserrat', sans-serif;
-      font-size: 0.9rem;
-      font-weight: 600;
+      font-family: 'Cinzel', serif;
+      font-size: 0.92rem;
+      font-weight: 700;
       letter-spacing: 0.14em;
       text-transform: uppercase;
       cursor: pointer;
@@ -159,7 +160,7 @@
       -webkit-backdrop-filter: blur(14px);
       border: 1px solid var(--border-royal);
       border-radius: 26px;
-      padding: 2.2rem 1.4rem;
+      padding: 2.3rem 1.4rem;
       margin-bottom: 1.5rem;
       text-align: center;
       box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.12);
@@ -168,51 +169,87 @@
 
     .card:hover {
       transform: translateY(-3px);
-      border-color: rgba(246, 223, 159, 0.55);
+      border-color: rgba(246, 223, 159, 0.6);
+    }
+
+    .hero-card {
+      padding: 2.8rem 1.5rem 2.4rem;
+      background: linear-gradient(180deg, rgba(13, 35, 96, 0.84) 0%, rgba(7, 19, 56, 0.78) 100%);
+      border-color: rgba(246, 223, 159, 0.52);
     }
 
     .kicker {
-      font-size: 0.74rem;
-      letter-spacing: 0.24em;
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: 1.05rem;
+      letter-spacing: 0.06em;
+      color: var(--gold-light);
+      margin-bottom: 0.45rem;
+    }
+
+    .xv-badge-top {
+      display: inline-block;
+      font-family: 'Cinzel', serif;
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 0.32em;
       text-transform: uppercase;
       color: var(--gold-light);
-      margin-bottom: 0.5rem;
+      padding: 0.25rem 0.9rem;
+      border-top: 1px solid rgba(246, 223, 159, 0.45);
+      border-bottom: 1px solid rgba(246, 223, 159, 0.45);
+      margin-bottom: 0.75rem;
     }
 
     h1 {
       font-family: 'Cinzel', serif;
-      font-size: clamp(1.9rem, 6vw, 2.7rem);
+      font-size: clamp(2.5rem, 9.5vw, 3.85rem);
       font-weight: 700;
       letter-spacing: 0.08em;
+      line-height: 1.08;
       color: #ffffff;
-      margin-bottom: 0.2rem;
+      text-shadow: 0 0 28px rgba(246, 223, 159, 0.35), 0 6px 20px rgba(0, 0, 0, 0.55);
+      margin-bottom: 0.3rem;
     }
 
     .quinceanera-name {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(2.9rem, 9vw, 4.3rem);
-      font-style: italic;
-      font-weight: 600;
-      color: var(--ice-blue);
-      line-height: 1.1;
+      font-family: 'Great Vibes', cursive;
+      font-size: clamp(3.8rem, 13.5vw, 5.6rem);
+      font-weight: 400;
+      color: var(--gold-light);
+      line-height: 1.05;
       margin-bottom: 1rem;
-      text-shadow: 0 0 24px rgba(90, 160, 255, 0.65);
+      text-shadow: 0 0 28px rgba(246, 223, 159, 0.45), 0 4px 16px rgba(0, 0, 0, 0.6);
+    }
+
+    .invite-message {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: clamp(1.22rem, 4.2vw, 1.52rem);
+      color: #ffffff;
+      max-width: 460px;
+      margin: 0.4rem auto 0.2rem;
+      line-height: 1.45;
+      text-shadow: 0 2px 12px rgba(0, 0, 0, 0.45);
     }
 
     h2 {
-      font-family: 'Cinzel', serif;
-      font-size: 1.3rem;
-      letter-spacing: 0.08em;
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: clamp(1.65rem, 5.5vw, 2.05rem);
+      font-weight: 600;
+      letter-spacing: 0.03em;
       color: #ffffff;
       margin-bottom: 1rem;
     }
 
     .parents-box {
-      margin-top: 1.2rem;
-      padding-top: 1.2rem;
+      margin-top: 1.35rem;
+      padding-top: 1.25rem;
       border-top: 1px solid var(--border-royal);
       color: var(--text-soft);
-      font-size: 0.98rem;
+      font-family: 'Playfair Display', serif;
+      font-size: 1.15rem;
     }
 
     .parents-box p {
@@ -220,11 +257,14 @@
     }
 
     .parents-box strong {
+      font-family: 'Cinzel', serif;
+      font-size: 0.88rem;
+      letter-spacing: 0.08em;
       color: var(--gold-light);
-      font-weight: 600;
+      font-weight: 700;
+      margin-right: 0.35rem;
     }
 
-    /* Marco vertical estilo GIF (9:16) */
     .video-wrap {
       width: 100%;
       max-width: 340px;
@@ -276,7 +316,7 @@
     }
 
     .info-item {
-      padding: 0.85rem 0;
+      padding: 0.9rem 0;
       border-bottom: 1px solid rgba(246, 223, 159, 0.16);
     }
 
@@ -285,15 +325,18 @@
     }
 
     .info-label {
-      font-size: 0.75rem;
+      font-family: 'Cinzel', serif;
+      font-size: 0.76rem;
+      font-weight: 700;
       text-transform: uppercase;
-      letter-spacing: 0.16em;
+      letter-spacing: 0.18em;
       color: var(--gold-light);
       margin-bottom: 0.25rem;
     }
 
     .info-value {
-      font-size: 1.08rem;
+      font-family: 'Playfair Display', serif;
+      font-size: 1.28rem;
       font-weight: 600;
       color: #ffffff;
     }
@@ -307,12 +350,13 @@
     .btn-action {
       display: inline-block;
       margin-top: 1rem;
-      padding: 0.9rem 1.8rem;
+      padding: 0.95rem 1.85rem;
       border-radius: 999px;
       text-decoration: none;
-      font-size: 0.86rem;
-      font-weight: 600;
-      letter-spacing: 0.08em;
+      font-family: 'Cinzel', serif;
+      font-size: 0.84rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
       text-transform: uppercase;
       transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
@@ -332,12 +376,12 @@
       color: #ffffff;
       box-shadow: 0 8px 24px rgba(37, 211, 102, 0.4);
       padding: 1.05rem 2.1rem;
-      font-size: 0.92rem;
+      font-size: 0.88rem;
     }
 
     .note {
       color: var(--text-soft);
-      font-size: 0.94rem;
+      font-size: 0.95rem;
     }
 
     #music-btn {
@@ -369,17 +413,18 @@
 
   <div id="splash">
     <div class="seal-badge">XV</div>
-    <p class="splash-subtitle">Tienes una invitación especial</p>
+    <p class="splash-subtitle">Celebremos juntos mis</p>
     <p class="splash-name">Ariana Milet</p>
     <button class="btn-open" id="open-btn" type="button">Abrir invitación</button>
   </div>
 
   <main>
-    <section class="card">
+    <section class="card hero-card">
+      <div class="xv-badge-top">Celebración Especial</div>
       <p class="kicker">Con la bendición de Dios y mis padres</p>
       <h1>Mis XV Años</h1>
       <div class="quinceanera-name">Ariana Milet</div>
-      <p class="note">Te invito a celebrar conmigo una noche mágica e inolvidable.</p>
+      <p class="invite-message">Con mucha ilusión te invito a compartir conmigo esta noche mágica e inolvidable.</p>
 
       <div class="parents-box">
         <p><strong>Mamá:</strong> Milena de la Cruz</p>
@@ -502,7 +547,6 @@
       else playMusic();
     });
 
-    // Verifica si existe video.mp4 y lo inicia en bucle silencioso tipo GIF
     fetch("video.mp4", { method: "HEAD" })
       .then((res) => {
         if (res.ok) {
@@ -522,7 +566,6 @@
       }
     });
 
-    // Cuenta regresiva: 13 de diciembre de 2026 a las 7:00 p. m.
     const eventDate = new Date("2026-12-13T19:00:00-05:00").getTime();
 
     function updateCountdown() {
@@ -537,105 +580,4 @@
 
       const days = Math.floor(diff / (1000 * 60 * 60 * 24));
       const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
-      const minutes = Math.floor((diff / (1000 * 60)) % 60);
-      const seconds = Math.floor((diff / 1000) % 60);
-
-      document.getElementById("days").textContent = String(days).padStart(2, "0");
-      document.getElementById("hours").textContent = String(hours).padStart(2, "0");
-      document.getElementById("minutes").textContent = String(minutes).padStart(2, "0");
-      document.getElementById("seconds").textContent = String(seconds).padStart(2, "0");
-    }
-
-    updateCountdown();
-    setInterval(updateCountdown, 1000);
-
-    // Partículas mágicas interactivas (reaccionan al tocar o mover el cursor)
-    const canvas = document.getElementById("magic-canvas");
-    const ctx = canvas.getContext("2d");
-    let width = (canvas.width = window.innerWidth);
-    let height = (canvas.height = window.innerHeight);
-
-    window.addEventListener("resize", () => {
-      width = canvas.width = window.innerWidth;
-      height = canvas.height = window.innerHeight;
-    });
-
-    const particles = [];
-    const colors = ["rgba(246, 223, 159,", "rgba(170, 210, 255,", "rgba(255, 255, 255,"];
-
-    function createParticle(x, y, burst = false) {
-      const color = colors[Math.floor(Math.random() * colors.length)];
-      return {
-        x: x ?? Math.random() * width,
-        y: y ?? Math.random() * height,
-        r: burst ? Math.random() * 2.8 + 1.2 : Math.random() * 2.2 + 0.6,
-        vx: burst ? (Math.random() - 0.5) * 2.4 : (Math.random() - 0.5) * 0.35,
-        vy: burst ? (Math.random() - 0.5) * 2.4 : -(Math.random() * 0.45 + 0.15),
-        alpha: burst ? 0.95 : Math.random() * 0.7 + 0.2,
-        decay: burst ? 0.02 : 0,
-        twinkle: Math.random() * Math.PI * 2,
-        color
-      };
-    }
-
-    for (let i = 0; i < 65; i++) {
-      particles.push(createParticle());
-    }
-
-    function spawnBurst(x, y, count = 10) {
-      for (let i = 0; i < count; i++) {
-        particles.push(createParticle(x, y, true));
-      }
-      if (particles.length > 160) {
-        particles.splice(65, particles.length - 160);
-      }
-    }
-
-    window.addEventListener("pointermove", (e) => {
-      if (Math.random() < 0.35) spawnBurst(e.clientX, e.clientY, 2);
-    });
-
-    window.addEventListener("pointerdown", (e) => {
-      spawnBurst(e.clientX, e.clientY, 14);
-    });
-
-    function animateMagic() {
-      ctx.clearRect(0, 0, width, height);
-
-      for (let i = particles.length - 1; i >= 0; i--) {
-        const p = particles[i];
-        p.x += p.vx;
-        p.y += p.vy;
-        p.twinkle += 0.04;
-
-        if (p.decay > 0) {
-          p.alpha -= p.decay;
-          if (p.alpha <= 0) {
-            particles.splice(i, 1);
-            continue;
-          }
-        } else {
-          if (p.y < -10) p.y = height + 10;
-          if (p.x < -10) p.x = width + 10;
-          if (p.x > width + 10) p.x = -10;
-        }
-
-        const currentAlpha = p.decay > 0
-          ? p.alpha
-          : p.alpha * (0.65 + 0.35 * Math.sin(p.twinkle));
-
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-        ctx.fillStyle = `${p.color} ${currentAlpha.toFixed(2)})`;
-        ctx.shadowBlur = 10;
-        ctx.shadowColor = "rgba(246, 223, 159, 0.7)";
-        ctx.fill();
-      }
-
-      requestAnimationFrame(animateMagic);
-    }
-
-    animateMagic();
-  </script>
-</body>
-</html>
+      const minutes = Math.floor((diff / (1000 * 60)) % 6

@@ -9,15 +9,16 @@
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
   <style>
     :root {
-      --royal-deep: #040d26;
-      --royal-blue: #0d2b7a;
-      --royal-bright: #1d56d8;
-      --bg-card: rgba(9, 24, 68, 0.82);
-      --gold-light: #f3d999;
-      --ice-blue: #d6e6ff;
+      --royal-deep: #03091f;
+      --royal-blue: #0b246b;
+      --royal-bright: #1e5ae6;
+      --bg-card: rgba(7, 19, 56, 0.72);
+      --gold-light: #f6df9f;
+      --gold-accent: #d4af37;
+      --ice-blue: #dceaff;
       --text-main: #ffffff;
-      --text-soft: #c7d9ff;
-      --border-royal: rgba(130, 177, 255, 0.35);
+      --text-soft: #c9dcff;
+      --border-royal: rgba(246, 223, 159, 0.28);
     }
 
     * {
@@ -28,26 +29,41 @@
 
     body {
       font-family: 'Montserrat', sans-serif;
-      background: radial-gradient(circle at top, #1743b5 0%, var(--royal-blue) 40%, var(--royal-deep) 90%);
+      background: radial-gradient(circle at 50% 0%, #1744b8 0%, var(--royal-blue) 42%, var(--royal-deep) 92%);
       color: var(--text-main);
       min-height: 100vh;
       overflow-x: hidden;
       line-height: 1.6;
     }
 
-    .sparkles {
+    /* Fondo mágico interactivo */
+    #magic-canvas {
       position: fixed;
       inset: 0;
+      width: 100%;
+      height: 100%;
       pointer-events: none;
-      background-image:
-        radial-gradient(2px 2px at 18% 25%, rgba(255,255,255,0.8), transparent),
-        radial-gradient(2px 2px at 82% 18%, rgba(243,217,153,0.8), transparent),
-        radial-gradient(1.5px 1.5px at 50% 65%, rgba(255,255,255,0.7), transparent),
-        radial-gradient(2px 2px at 15% 82%, rgba(160,200,255,0.7), transparent),
-        radial-gradient(2px 2px at 88% 78%, rgba(243,217,153,0.7), transparent);
       z-index: 0;
     }
 
+    .aurora-glow {
+      position: fixed;
+      inset: -20%;
+      pointer-events: none;
+      background:
+        radial-gradient(circle at 25% 20%, rgba(56, 128, 255, 0.25), transparent 45%),
+        radial-gradient(circle at 75% 65%, rgba(246, 223, 159, 0.14), transparent 50%),
+        radial-gradient(circle at 50% 90%, rgba(23, 75, 204, 0.3), transparent 55%);
+      animation: auroraFloat 14s ease-in-out infinite alternate;
+      z-index: 0;
+    }
+
+    @keyframes auroraFloat {
+      0% { transform: scale(1) translate(0, 0); }
+      100% { transform: scale(1.08) translate(-2%, 2%); }
+    }
+
+    /* Portada inicial */
     #splash {
       position: fixed;
       inset: 0;
@@ -58,8 +74,8 @@
       justify-content: center;
       text-align: center;
       padding: 2rem;
-      background: radial-gradient(circle at center, #1846bd 0%, #040d26 85%);
-      transition: opacity 0.6s ease, visibility 0.6s ease;
+      background: radial-gradient(circle at center, #1846bd 0%, #03091f 88%);
+      transition: opacity 0.7s ease, visibility 0.7s ease;
     }
 
     #splash.hidden {
@@ -69,25 +85,31 @@
     }
 
     .seal-badge {
-      width: 100px;
-      height: 100px;
+      width: 106px;
+      height: 106px;
       border-radius: 50%;
       border: 2px solid var(--gold-light);
-      box-shadow: 0 0 30px rgba(45, 108, 255, 0.7), inset 0 0 18px rgba(243, 217, 153, 0.35);
+      box-shadow: 0 0 35px rgba(58, 123, 255, 0.8), inset 0 0 20px rgba(246, 223, 159, 0.4);
       display: flex;
       align-items: center;
       justify-content: center;
       font-family: 'Cinzel', serif;
-      font-size: 2.2rem;
+      font-size: 2.3rem;
       font-weight: 700;
       color: var(--gold-light);
       margin-bottom: 1.5rem;
-      background: rgba(6, 18, 54, 0.9);
+      background: rgba(5, 15, 48, 0.9);
+      animation: pulseSeal 3s ease-in-out infinite;
+    }
+
+    @keyframes pulseSeal {
+      0%, 100% { box-shadow: 0 0 28px rgba(58, 123, 255, 0.7), inset 0 0 18px rgba(246, 223, 159, 0.35); }
+      50% { box-shadow: 0 0 46px rgba(246, 223, 159, 0.65), inset 0 0 24px rgba(58, 123, 255, 0.5); }
     }
 
     .splash-subtitle {
       font-size: 0.85rem;
-      letter-spacing: 0.22em;
+      letter-spacing: 0.24em;
       text-transform: uppercase;
       color: var(--text-soft);
       margin-bottom: 0.5rem;
@@ -95,50 +117,63 @@
 
     .splash-name {
       font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(2.6rem, 8vw, 4rem);
+      font-size: clamp(2.8rem, 8vw, 4.2rem);
       font-style: italic;
       color: #ffffff;
       margin-bottom: 1.8rem;
-      text-shadow: 0 0 24px rgba(100, 160, 255, 0.6);
+      text-shadow: 0 0 28px rgba(130, 180, 255, 0.75);
     }
 
     .btn-open {
-      background: linear-gradient(135deg, #2d6df6, #10389c);
+      background: linear-gradient(135deg, #2d6df6, #0e3394);
       color: #ffffff;
       border: 1px solid var(--gold-light);
-      padding: 1rem 2.3rem;
+      padding: 1rem 2.4rem;
       border-radius: 999px;
       font-family: 'Montserrat', sans-serif;
       font-size: 0.9rem;
       font-weight: 600;
-      letter-spacing: 0.12em;
+      letter-spacing: 0.14em;
       text-transform: uppercase;
       cursor: pointer;
-      box-shadow: 0 8px 25px rgba(16, 56, 156, 0.7);
+      box-shadow: 0 8px 28px rgba(16, 56, 156, 0.8);
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .btn-open:hover {
+      transform: scale(1.04);
+      box-shadow: 0 10px 34px rgba(246, 223, 159, 0.45);
     }
 
     main {
       position: relative;
       z-index: 1;
-      max-width: 650px;
+      max-width: 620px;
       margin: 0 auto;
-      padding: 2.2rem 1.2rem 4rem;
+      padding: 2.2rem 1.2rem 4.5rem;
     }
 
     .card {
       background: var(--bg-card);
-      backdrop-filter: blur(10px);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
       border: 1px solid var(--border-royal);
-      border-radius: 24px;
-      padding: 2.1rem 1.4rem;
-      margin-bottom: 1.4rem;
+      border-radius: 26px;
+      padding: 2.2rem 1.4rem;
+      margin-bottom: 1.5rem;
       text-align: center;
-      box-shadow: 0 14px 35px rgba(0, 0, 0, 0.45);
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.12);
+      transition: transform 0.35s ease, border-color 0.35s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-3px);
+      border-color: rgba(246, 223, 159, 0.55);
     }
 
     .kicker {
-      font-size: 0.75rem;
-      letter-spacing: 0.22em;
+      font-size: 0.74rem;
+      letter-spacing: 0.24em;
       text-transform: uppercase;
       color: var(--gold-light);
       margin-bottom: 0.5rem;
@@ -155,13 +190,13 @@
 
     .quinceanera-name {
       font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(2.8rem, 8.5vw, 4.2rem);
+      font-size: clamp(2.9rem, 9vw, 4.3rem);
       font-style: italic;
       font-weight: 600;
       color: var(--ice-blue);
       line-height: 1.1;
       margin-bottom: 1rem;
-      text-shadow: 0 0 22px rgba(77, 148, 255, 0.55);
+      text-shadow: 0 0 24px rgba(90, 160, 255, 0.65);
     }
 
     h2 {
@@ -189,19 +224,26 @@
       font-weight: 600;
     }
 
+    /* Marco vertical estilo GIF (9:16) */
     .video-wrap {
-      margin-top: 1rem;
-      border-radius: 18px;
+      width: 100%;
+      max-width: 340px;
+      aspect-ratio: 9 / 16;
+      margin: 1rem auto 0;
+      border-radius: 22px;
       overflow: hidden;
-      border: 1px solid var(--border-royal);
+      border: 2px solid var(--gold-light);
+      box-shadow: 0 12px 34px rgba(0, 0, 0, 0.65), 0 0 24px rgba(45, 109, 246, 0.45);
       background: #03091a;
+      position: relative;
     }
 
     .video-wrap video {
       width: 100%;
-      max-height: 460px;
+      height: 100%;
       display: block;
       object-fit: cover;
+      pointer-events: none;
     }
 
     .countdown-grid {
@@ -212,7 +254,7 @@
     }
 
     .time-box {
-      background: rgba(4, 13, 38, 0.8);
+      background: rgba(3, 10, 32, 0.82);
       border: 1px solid var(--border-royal);
       border-radius: 16px;
       padding: 0.9rem 0.3rem;
@@ -235,7 +277,7 @@
 
     .info-item {
       padding: 0.85rem 0;
-      border-bottom: 1px solid rgba(130, 177, 255, 0.18);
+      border-bottom: 1px solid rgba(246, 223, 159, 0.16);
     }
 
     .info-item:last-child {
@@ -272,7 +314,7 @@
       font-weight: 600;
       letter-spacing: 0.08em;
       text-transform: uppercase;
-      transition: transform 0.2s ease;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
 
     .btn-action:hover {
@@ -280,7 +322,7 @@
     }
 
     .btn-map {
-      background: rgba(45, 109, 246, 0.25);
+      background: rgba(45, 109, 246, 0.28);
       color: #ffffff;
       border: 1px solid var(--gold-light);
     }
@@ -303,20 +345,21 @@
       bottom: 18px;
       right: 18px;
       z-index: 40;
-      width: 48px;
-      height: 48px;
+      width: 50px;
+      height: 50px;
       border-radius: 50%;
       border: 1px solid var(--gold-light);
-      background: rgba(9, 24, 68, 0.92);
+      background: rgba(7, 19, 56, 0.92);
       color: var(--gold-light);
-      font-size: 1.15rem;
+      font-size: 1.2rem;
       cursor: pointer;
-      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.45);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5);
     }
   </style>
 </head>
 <body>
-  <div class="sparkles"></div>
+  <div class="aurora-glow"></div>
+  <canvas id="magic-canvas"></canvas>
 
   <audio id="bg-music" loop preload="metadata">
     <source src="musica.mp3" type="audio/mpeg" />
@@ -336,7 +379,7 @@
       <p class="kicker">Con la bendición de Dios y mis padres</p>
       <h1>Mis XV Años</h1>
       <div class="quinceanera-name">Ariana Milet</div>
-      <p class="note">Te invito a celebrar conmigo una noche inolvidable.</p>
+      <p class="note">Te invito a celebrar conmigo una noche mágica e inolvidable.</p>
 
       <div class="parents-box">
         <p><strong>Mamá:</strong> Milena de la Cruz</p>
@@ -344,11 +387,12 @@
       </div>
     </section>
 
+    <!-- Video vertical automático tipo GIF -->
     <section class="card" id="video-section" style="display: none;">
-      <p class="kicker">Un adelanto especial</p>
-      <h2>Mi invitación</h2>
+      <p class="kicker">Un instante mágico</p>
+      <h2>Ariana Milet</h2>
       <div class="video-wrap">
-        <video id="invite-video" controls playsinline preload="metadata">
+        <video id="invite-video" autoplay muted loop playsinline preload="auto">
           <source src="video.mp4" type="video/mp4" />
         </video>
       </div>
@@ -458,21 +502,27 @@
       else playMusic();
     });
 
+    // Verifica si existe video.mp4 y lo inicia en bucle silencioso tipo GIF
     fetch("video.mp4", { method: "HEAD" })
       .then((res) => {
-        if (res.ok) videoSection.style.display = "block";
+        if (res.ok) {
+          videoSection.style.display = "block";
+          inviteVideo.muted = true;
+          inviteVideo.play().catch(() => {});
+        }
       })
       .catch(() => {});
 
     openBtn.addEventListener("click", () => {
       splash.classList.add("hidden");
       playMusic();
+      if (videoSection.style.display === "block") {
+        inviteVideo.muted = true;
+        inviteVideo.play().catch(() => {});
+      }
     });
 
-    inviteVideo.addEventListener("play", () => {
-      if (isPlaying) pauseMusic();
-    });
-
+    // Cuenta regresiva: 13 de diciembre de 2026 a las 7:00 p. m.
     const eventDate = new Date("2026-12-13T19:00:00-05:00").getTime();
 
     function updateCountdown() {
@@ -498,6 +548,94 @@
 
     updateCountdown();
     setInterval(updateCountdown, 1000);
+
+    // Partículas mágicas interactivas (reaccionan al tocar o mover el cursor)
+    const canvas = document.getElementById("magic-canvas");
+    const ctx = canvas.getContext("2d");
+    let width = (canvas.width = window.innerWidth);
+    let height = (canvas.height = window.innerHeight);
+
+    window.addEventListener("resize", () => {
+      width = canvas.width = window.innerWidth;
+      height = canvas.height = window.innerHeight;
+    });
+
+    const particles = [];
+    const colors = ["rgba(246, 223, 159,", "rgba(170, 210, 255,", "rgba(255, 255, 255,"];
+
+    function createParticle(x, y, burst = false) {
+      const color = colors[Math.floor(Math.random() * colors.length)];
+      return {
+        x: x ?? Math.random() * width,
+        y: y ?? Math.random() * height,
+        r: burst ? Math.random() * 2.8 + 1.2 : Math.random() * 2.2 + 0.6,
+        vx: burst ? (Math.random() - 0.5) * 2.4 : (Math.random() - 0.5) * 0.35,
+        vy: burst ? (Math.random() - 0.5) * 2.4 : -(Math.random() * 0.45 + 0.15),
+        alpha: burst ? 0.95 : Math.random() * 0.7 + 0.2,
+        decay: burst ? 0.02 : 0,
+        twinkle: Math.random() * Math.PI * 2,
+        color
+      };
+    }
+
+    for (let i = 0; i < 65; i++) {
+      particles.push(createParticle());
+    }
+
+    function spawnBurst(x, y, count = 10) {
+      for (let i = 0; i < count; i++) {
+        particles.push(createParticle(x, y, true));
+      }
+      if (particles.length > 160) {
+        particles.splice(65, particles.length - 160);
+      }
+    }
+
+    window.addEventListener("pointermove", (e) => {
+      if (Math.random() < 0.35) spawnBurst(e.clientX, e.clientY, 2);
+    });
+
+    window.addEventListener("pointerdown", (e) => {
+      spawnBurst(e.clientX, e.clientY, 14);
+    });
+
+    function animateMagic() {
+      ctx.clearRect(0, 0, width, height);
+
+      for (let i = particles.length - 1; i >= 0; i--) {
+        const p = particles[i];
+        p.x += p.vx;
+        p.y += p.vy;
+        p.twinkle += 0.04;
+
+        if (p.decay > 0) {
+          p.alpha -= p.decay;
+          if (p.alpha <= 0) {
+            particles.splice(i, 1);
+            continue;
+          }
+        } else {
+          if (p.y < -10) p.y = height + 10;
+          if (p.x < -10) p.x = width + 10;
+          if (p.x > width + 10) p.x = -10;
+        }
+
+        const currentAlpha = p.decay > 0
+          ? p.alpha
+          : p.alpha * (0.65 + 0.35 * Math.sin(p.twinkle));
+
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+        ctx.fillStyle = `${p.color} ${currentAlpha.toFixed(2)})`;
+        ctx.shadowBlur = 10;
+        ctx.shadowColor = "rgba(246, 223, 159, 0.7)";
+        ctx.fill();
+      }
+
+      requestAnimationFrame(animateMagic);
+    }
+
+    animateMagic();
   </script>
 </body>
 </html>

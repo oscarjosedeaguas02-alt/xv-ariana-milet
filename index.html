@@ -258,25 +258,32 @@
       margin-right: 0.35rem;
     }
 
-    .video-wrap {
+    /* Marco fotográfico vertical elegante */
+    .photo-wrap {
       width: 100%;
       max-width: 340px;
-      aspect-ratio: 9 / 16;
+      aspect-ratio: 4 / 5;
       margin: 1rem auto 0;
       border-radius: 22px;
       overflow: hidden;
       border: 2px solid var(--gold-light);
-      box-shadow: 0 12px 34px rgba(0, 0, 0, 0.65), 0 0 24px rgba(45, 109, 246, 0.45);
+      box-shadow: 0 12px 34px rgba(0, 0, 0, 0.65), 0 0 24px rgba(246, 223, 159, 0.28);
       background: #03091a;
       position: relative;
     }
 
-    .video-wrap video {
+    .photo-wrap img {
       width: 100%;
       height: 100%;
       display: block;
       object-fit: cover;
-      pointer-events: none;
+      object-position: center top;
+      animation: gentleZoom 12s ease-in-out infinite alternate;
+    }
+
+    @keyframes gentleZoom {
+      0% { transform: scale(1); }
+      100% { transform: scale(1.06); }
     }
 
     .countdown-grid {
@@ -425,13 +432,12 @@
       </div>
     </section>
 
-    <section class="card" id="video-section" style="display: none;">
+    <!-- Sección de la foto de Ariana Milet -->
+    <section class="card" id="photo-section">
       <p class="kicker">Un instante mágico</p>
       <h2>Ariana Milet</h2>
-      <div class="video-wrap">
-        <video id="invite-video" autoplay muted loop playsinline preload="auto">
-          <source src="video.mp4" type="video/mp4" />
-        </video>
+      <div class="photo-wrap">
+        <img src="foto.jpg" alt="Ariana Milet — Mis XV Años" />
       </div>
     </section>
 
@@ -516,8 +522,6 @@
     const splash = document.getElementById("splash");
     const bgMusic = document.getElementById("bg-music");
     const musicBtn = document.getElementById("music-btn");
-    const videoSection = document.getElementById("video-section");
-    const inviteVideo = document.getElementById("invite-video");
     let isPlaying = false;
 
     function playMusic() {
@@ -541,10 +545,6 @@
         splash.style.display = "none";
       }
       playMusic();
-      if (videoSection && videoSection.style.display === "block" && inviteVideo) {
-        inviteVideo.muted = true;
-        inviteVideo.play().catch(() => {});
-      }
     }
 
     if (musicBtn) {
@@ -552,18 +552,6 @@
         if (isPlaying) pauseMusic();
         else playMusic();
       });
-    }
-
-    if (window.location.protocol !== "file:") {
-      fetch("video.mp4", { method: "HEAD" })
-        .then((res) => {
-          if (res.ok && videoSection && inviteVideo) {
-            videoSection.style.display = "block";
-            inviteVideo.muted = true;
-            inviteVideo.play().catch(() => {});
-          }
-        })
-        .catch(() => {});
     }
 
     const eventDate = new Date("2026-12-13T19:00:00-05:00").getTime();
